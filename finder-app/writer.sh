@@ -1,6 +1,60 @@
 #!/bin/bash 
 
 
+
+# if [ "$#" -ne 2 ]
+# then
+#     echo " Two parameters are required "
+#     echo "1) a path to a directory on the filesystem"
+#     echo "2) a text string which will be searched within these files"
+#     exit 1
+
+# fi 
+
+# writefile=$1
+# writestr=$2
+
+
+# filedir=$(dirname "$writefile" )
+
+# if [ ! -d "$filedir" ]
+
+# then
+    
+#     mkdir -p $filedir 
+#     if [ $? -ne 0 ]
+#         echo " Could not create the file"
+#         exit 1 
+#     fi
+
+# fi 
+
+# echo "$writestr" > $writefile
+
+# if [ $? -ne 0 ]
+
+# then 
+#     echo "Could not create the file."
+#     exit 1 
+# fi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 if [ $# -eq 0 ] || [ -z "$1" ] || [ -z "$2" ] 
 then
     echo " need more arguments for writer"

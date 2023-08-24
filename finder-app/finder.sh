@@ -3,31 +3,98 @@
 
 if [ $# -eq 0 ] || [ -z "$1" ] || [ -z "$2" ]
 then
-    echo " need more arguments"
+    echo " Two parameters are required "
+    echo "1) a path to a directory on the filesystem"
+    echo "2) a text string which will be searched within these files"
     exit 1
 
 fi 
 
-filesdir=$1
-searchstr=$2
+files=$( find "$1" -type f )
 
-if [ -d "$filesdir" ]
-then 
-    echo "${filesdir} is present " 
+match_count=0
 
-else 
-    echo "failed: ${filesdir} is not a directory"
-    exit 1 
+for file in $files;
+do 
+    if grep -q "$2" "$file"
+    then 
+        match_count=$((match_count + $(grep -c "$2" "$file")))
+    fi
+done 
 
-fi 
+file_count=$( echo "$files" | wc -l ) 
 
-num_files=$(find "${filesdir}" -type f | wc -l) 
+echo " The number of files are $file_count and the number of matching lines are $match_count."
 
-num_occurence=$(grep -r "${searchstr}" "${filesdir}" | wc -l) 
 
-echo "the number of files are ${num_files} and the number of matching lines are ${num_occurence}"
 
-exit 0
+
+
+
+
+
+# if [ "$#" -ne 2 ]
+# then
+#     echo " Two parameters are required "
+#     echo "1) a path to a directory on the filesystem"
+#     echo "2) a text string which will be searched within these files"
+#     exit 1
+
+# fi 
+
+# filesdir=$1
+# searchstr=$2
+
+# # This will check if the input directory exists
+
+# if [ ! -d "$filesdir" ]
+# then 
+#     echo " The input directory ${filesdir} is not present. " 
+
+# # else 
+# #     echo "failed: ${filesdir} is not a directory"
+#     exit 1 
+
+# fi 
+
+# num_files=$(find "${filesdir}" -type f | wc -l) 
+
+# num_of_time=$(grep -r "${searchstr}" "${filesdir}" | wc -l) 
+
+# echo "the number of files are ${num_files} and the number of matching lines are ${num_of_time}"
+
+
+
+
+
+
+# if [ $# -eq 0 ] || [ -z "$1" ] || [ -z "$2" ]
+# then
+#     echo " need more arguments"
+#     exit 1
+
+# fi 
+
+# filesdir=$1
+# searchstr=$2
+
+# if [ -d "$filesdir" ]
+# then 
+#     echo "${filesdir} is present " 
+
+# else 
+#     echo "failed: ${filesdir} is not a directory"
+#     exit 1 
+
+# fi 
+
+# num_files=$(find "${filesdir}" -type f | wc -l) 
+
+# num_occurence=$(grep -r "${searchstr}" "${filesdir}" | wc -l) 
+
+# echo "the number of files are ${num_files} and the number of matching lines are ${num_occurence}"
+
+# exit 0
 
 
 
