@@ -1,5 +1,23 @@
 #!/bin/bash 
 
+if [ $# -ne 2 ]
+then 
+        echo "Usage: $0 <writefile> <writestr>"
+        exit 1 
+
+fi 
+
+writefile=$1
+writestr=$2 
+
+writefilepath=$(dirname $writefile)
+mkdir -p $writefilepath 
+echo $writestr > $writefile 
+
+
+
+
+
 
 
 # if [ "$#" -ne 2 ]
@@ -50,46 +68,41 @@
 
 
 
+# if [ $# -eq 0 ] || [ -z "$1" ] || [ -z "$2" ] 
+# then
+#     echo " need more arguments for writer"
+#     exit 1
+
+# fi 
+
+# writefile=$1
+# writestr=$2
+
+# if [ -e "$writefile" ]
+# then 
+#     echo "${writefile} is in the house, ressetting the file."
+#     cat /dev/null -> ${writefile}
+
+# else 
+#     echo "${writefile} is not in the house"
+#     mkdir -p "$(dirname $writefile)" && touch "$writefile"
+
+# fi 
 
 
+# if [ -d "$(dirname $writefile)" ] 
 
+# then 
+#     echo "${writefile} written to file successfully"
+#     echo "${writestr}" | tee ${writefile}
 
+# else
+#     echo " The file writing failed"
+#     exit 1
 
-if [ $# -eq 0 ] || [ -z "$1" ] || [ -z "$2" ] 
-then
-    echo " need more arguments for writer"
-    exit 1
+# fi 
 
-fi 
-
-writefile=$1
-writestr=$2
-
-if [ -e "$writefile" ]
-then 
-    echo "${writefile} is in the house, ressetting the file."
-    cat /dev/null -> ${writefile}
-
-else 
-    echo "${writefile} is not in the house"
-    mkdir -p "$(dirname $writefile)" && touch "$writefile"
-
-fi 
-
-
-if [ -d "$(dirname $writefile)" ] 
-
-then 
-    echo "${writefile} written to file successfully"
-    echo "${writestr}" | tee ${writefile}
-
-else
-    echo " The file writing failed"
-    exit 1
-
-fi 
-
-exit 0
+# exit 0
 
 
 
