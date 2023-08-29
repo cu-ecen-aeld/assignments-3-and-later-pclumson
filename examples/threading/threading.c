@@ -62,11 +62,11 @@ bool start_thread_obtaining_mutex(pthread_t *thread, pthread_mutex_t *mutex,int 
     if (rc != 0)
     {
         ERROR_LOG("Failed to create thread, error was %d", rc);
-        return false;
+        return true;
     }
 
 
-    return true;
+    
 
-    // return false;coreyHan2013
+    return false;
 }
