@@ -1,4 +1,5 @@
 #include "systemcalls.h"
+<<<<<<< HEAD
 #include <stdlib.h>
 #include <sys/types.h>
 #include <unistd.h>
@@ -12,6 +13,8 @@
 
 
 
+=======
+>>>>>>> assignments-base/assignment5
 
 /**
  * @param cmd the command to execute with system()
@@ -30,6 +33,7 @@ bool do_system(const char *cmd)
  *   or false() if it returned a failure
 */
 
+<<<<<<< HEAD
 
     int rc;
     rc = system(cmd);
@@ -42,6 +46,9 @@ bool do_system(const char *cmd)
         return true;
     }
     
+=======
+    return true;
+>>>>>>> assignments-base/assignment5
 }
 
 /**
@@ -64,17 +71,23 @@ bool do_exec(int count, ...)
     va_start(args, count);
     char * command[count+1];
     int i;
+<<<<<<< HEAD
     
+=======
+>>>>>>> assignments-base/assignment5
     for(i=0; i<count; i++)
     {
         command[i] = va_arg(args, char *);
     }
+<<<<<<< HEAD
 
 
 
 
 
 
+=======
+>>>>>>> assignments-base/assignment5
     command[count] = NULL;
     // this line is to avoid a compile warning before your implementation is complete
     // and may be removed
@@ -89,6 +102,7 @@ bool do_exec(int count, ...)
  *   as second argument to the execv() command.
  *
 */
+<<<<<<< HEAD
     pid_t pid;
     int status;
 
@@ -127,6 +141,9 @@ bool do_exec(int count, ...)
         
     }
     
+=======
+
+>>>>>>> assignments-base/assignment5
     va_end(args);
 
     return true;
@@ -159,6 +176,7 @@ bool do_exec_redirect(const char *outputfile, int count, ...)
  *   redirect standard out to a file specified by outputfile.
  *   The rest of the behaviour is same as do_exec()
  *
+<<<<<<< HEAD
 */ 
 
     pid_t pid;
@@ -218,8 +236,15 @@ bool do_exec_redirect(const char *outputfile, int count, ...)
         
     }
     
+=======
+*/
+>>>>>>> assignments-base/assignment5
 
     va_end(args);
 
     return true;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> assignments-base/assignment5

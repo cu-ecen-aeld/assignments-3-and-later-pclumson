@@ -9,4 +9,8 @@ else
     echo "Completed with failure, failed with rc=${rc}"
 fi
 echo "finder-app execution complete, dropping to terminal"
+<<<<<<< HEAD
 /bin/sh
+=======
+/bin/sh
+>>>>>>> assignments-base/assignment5

@@ -6,4 +6,8 @@ bool do_system(const char *command);
 
 bool do_exec(int count, ...);
 
+<<<<<<< HEAD
 bool do_exec_redirect(const char *outputfile, int count, ...);
+=======
+bool do_exec_redirect(const char *outputfile, int count, ...);
+>>>>>>> assignments-base/assignment5

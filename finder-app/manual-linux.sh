@@ -35,6 +35,7 @@ if [ ! -e ${OUTDIR}/linux-stable/arch/${ARCH}/boot/Image ]; then
     git checkout ${KERNEL_VERSION}
 
     # TODO: Add your kernel build steps here
+<<<<<<< HEAD
         echo "mrproper started"
         make ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} mrproper
         echo "Started defconfig"
@@ -53,6 +54,11 @@ fi
 echo "Adding the Image in outdir"
 cd "$OUTDIR/linux-stable"
 cp arch/arm64/boot/Image $OUTDIR/
+=======
+fi
+
+echo "Adding the Image in outdir"
+>>>>>>> assignments-base/assignment5
 
 echo "Creating the staging directory for the root filesystem"
 cd "$OUTDIR"
@@ -63,11 +69,14 @@ then
 fi
 
 # TODO: Create necessary base directories
+<<<<<<< HEAD
 mkdir "$OUTDIR/rootfs"
 cd "$OUTDIR/rootfs"
 mkdir -p bin dev etc home lib lib64 proc sbin sys tmp usr var
 mkdir -p usr/bin usr/lib usr/sbin
 mkdir -p var/log
+=======
+>>>>>>> assignments-base/assignment5
 
 cd "$OUTDIR"
 if [ ! -d "${OUTDIR}/busybox" ]
@@ -81,16 +90,20 @@ else
 fi
 
 # TODO: Make and install busybox
+<<<<<<< HEAD
 make distclean
 make defconfig
 make -j4 ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE}
 make CONFIG_PREFIX=${OUTDIR}/rootfs CROSS_COMPILE=${CROSS_COMPILE} install
+=======
+>>>>>>> assignments-base/assignment5
 
 echo "Library dependencies"
 ${CROSS_COMPILE}readelf -a bin/busybox | grep "program interpreter"
 ${CROSS_COMPILE}readelf -a bin/busybox | grep "Shared library"
 
 # TODO: Add library dependencies to rootfs
+<<<<<<< HEAD
 cd "$OUTDIR"
 CROSS_COMPILE_GCC=$(which ${CROSS_COMPILE}gcc)
 CROSS_COMPILE_GCCPATH=$(dirname ${CROSS_COMPILER_GCC})
@@ -129,3 +142,16 @@ cd "$OUTDIR/rootfs"
 find . | cpio -H newc -ov --owner root:root > ${OUTDIR}/initramfs.cpio
 cd "$OUTDIR"
 gzip -f initramfs.cpio
+=======
+
+# TODO: Make device nodes
+
+# TODO: Clean and build the writer utility
+
+# TODO: Copy the finder related scripts and executables to the /home directory
+# on the target rootfs
+
+# TODO: Chown the root directory
+
+# TODO: Create initramfs.cpio.gz
+>>>>>>> assignments-base/assignment5
