@@ -34,6 +34,7 @@ static void signal_handler(int signal_number)
 static void set_signal_handler()
 {
     struct sigaction new_action;
+    // sigaction new_action;
 
     memset(&new_action, 0, sizeof(struct sigaction));
     new_action.sa_handler = signal_handler;
@@ -60,8 +61,10 @@ static void socket_service(int server_fd)
     int addrlen = 0;
     char ipstr[INET6_ADDRSTRLEN];
 
-    fd = open(tmp_file, O_RDWR | O_CREAT | O_TRUNC,
-              S_IRWXU | S_IRWXG | S_IROTH);
+    // fd = open(tmp_file, O_RDWR | O_CREAT | O_TRUNC,
+    //           S_IRWXU | S_IRWXG | S_IROTH);
+
+    fd = open(tmp_file, O_RDWR | O_CREAT | O_TRUNC,0664);
     if (fd == -1) 
     {
         syslog(LOG_ERR, "Open file error: %s", strerror(errno));
