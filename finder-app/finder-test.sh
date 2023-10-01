@@ -56,16 +56,21 @@ then
 	fi
 fi
 
-echo "Removing the old writer utility and compiling as a native application"
-make clean
-make
+# echo "Removing the old writer utility and compiling as a native application"
+# make clean
+# make
+
+current_directory=$(pwd)
+echo "The current directory is : $current_directory"
 
 for i in $( seq 1 $NUMFILES)
 do
 	./writer.sh "$WRITEDIR/${username}$i.txt" "$WRITESTR"
 done
 
-OUTPUTSTRING=$(./finder.sh "$WRITEDIR" "$WRITESTR")
+# OUTPUTSTRING=$(./finder.sh "$WRITEDIR" "$WRITESTR")
+
+OUTPUTSTRING=$(finder.sh "$WRITEDIR" "$WRITESTR")
 echo ${OUTPUTSTRING} > /tmp/assignment4-result.txt
 
 # remove temporary directories
