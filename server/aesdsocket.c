@@ -1,26 +1,60 @@
 #include <stdio.h>
+#include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <fcntl.h>
 #include <netinet/in.h>
 #include <sys/types.h>
 #include <sys/socket.h>
+#include <sys/stat.h>
 #include <errno.h>
 #include <unistd.h>
 #include <syslog.h>
 #include <stdbool.h>
 #include <signal.h>
 #include <arpa/inet.h>
+#include <pthread.h>
+#include <time.h>
+//#include "../aesd-char-driver/aesd_ioctl.h"
+
 
 #define PORT 9000
 #define BUF_SIZE 65535
 
 #define DEBUG_LOG(msg,...)
-//#define DEBUG_LOG(msg,...) printf("socket: " msg "\n" , ##__VA_ARGS__)
+#define DEBUG_LOG(msg,...) printf("socket: " msg "\n" , ##__VA_ARGS__)
 #define ERROR_LOG(msg,...) printf("socket ERROR: " msg "\n" , ##__VA_ARGS__)
 
 const char *tmp_file = "/var/tmp/aesdsocketdata";
 volatile bool caught_sig = false;
+
+
+// #if defined(USE_AESD_CHAR_DEVICE)
+// const char *tmp_file = "/dev/aesdchar";
+// #else
+// const char *tmp_file = "/var/tmp/aesdsocketdata";
+// #endif
+// const char *SEEK_CMD = "AESDCHAR_IOCSEEKTO";
+
+// volatile bool caught_sig = false;
+
+// struct file_info {
+//   int fd;
+//   pthread_mutex_t mtx;
+// };
+
+// struct thread_param {
+//   struct file_info *info;
+//   struct sockaddr address;
+//   int socket;
+//   bool complete_flag;
+// };
+
+// struct thread_node {
+//   pthread_t id;
+//   struct thread_param param;
+//   struct thread_node *next;
+// };
 
 static void signal_handler(int signal_number)
 {
@@ -68,7 +102,8 @@ static void socket_service(int server_fd)
     if (fd == -1) 
     {
         syslog(LOG_ERR, "Open file error: %s", strerror(errno));
-        ERROR_LOG("Error %d (%s) registering for SIGTERM", errno, strerror(errno));
+        // ERROR_LOG("Error %d (%s) registering for SIGTERM", errno, strerror(errno));
+        ERROR_LOG("Open file errno: %d, meaning: %s", errno, strerror(errno));
         exit(-1);
     }
 
